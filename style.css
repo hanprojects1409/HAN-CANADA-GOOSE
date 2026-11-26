@@ -1,11 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-/* =========================================
-   HAN GLOBAL × CANADA GOOSE FW26
-   ENGAGEMENT TRACKER
-   ========================================= */
-
 :root {
     --black: #101214;
     --black-soft: #191d20;
@@ -23,6 +18,7 @@
     --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 
     --content-width: 1180px;
+    --page-gutter: 42px;
 }
 
 /* RESET */
@@ -73,9 +69,7 @@ a {
     display: none !important;
 }
 
-/* =========================================
-   HERO / HEADER
-   ========================================= */
+/* HERO / HEADER */
 
 .hero {
     position: relative;
@@ -121,7 +115,7 @@ a {
         0 0 0 58px rgba(255,255,255,0.02);
 }
 
-.hero > span:first-child {
+.hero .subtitle {
     display: inline-block;
     width: fit-content;
     margin-bottom: 25px;
@@ -147,7 +141,7 @@ a {
     color: var(--red);
 }
 
-.hero .subtitle {
+.hero .hero-description {
     margin-top: 25px;
     color: #c2cbd0;
     font-size: 12px;
@@ -156,34 +150,29 @@ a {
     text-transform: uppercase;
 }
 
-.hero .hero-line {
-    width: 55px;
-    height: 4px;
-    margin-top: 30px;
-    background: var(--red);
-}
-
-/* =========================================
-   MAIN CONTENT
-   ========================================= */
+/* MAIN CONTENT */
 
 main,
 main.container {
-    width: min(100% - 48px, var(--content-width));
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
 }
 
 section {
-    margin-top: 48px;
+    width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-width));
+    margin: 48px auto 0;
 }
 
 .section-title {
     margin-bottom: 22px;
+    padding-left: 2px;
     color: var(--black);
     font-family: var(--font-display);
     font-size: 32px;
     font-weight: 700;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
@@ -197,15 +186,14 @@ section {
     background: var(--red);
 }
 
-/* =========================================
-   CATEGORY NAVIGATION
-   ========================================= */
+/* CATEGORY NAVIGATION */
 
 .tabs {
     display: flex;
     align-items: stretch;
     gap: 0;
-    margin: 35px 0 40px;
+    width: 100%;
+    margin: 0;
     background: var(--black);
     border-bottom: 3px solid var(--red);
     overflow-x: auto;
@@ -242,41 +230,49 @@ section {
     color: var(--white);
 }
 
-/* =========================================
-   OVERVIEW
-   ========================================= */
+/* OVERVIEW */
 
 .overview-section {
-    margin-top: 42px;
+    margin-top: 46px;
 }
 
-.overview-section > h2 {
-    margin-bottom: 22px;
-    font-family: var(--font-display);
-    font-size: 34px;
-    font-weight: 700;
-    line-height: 1;
-    text-transform: uppercase;
+.overview-section > .section-title {
+    margin-bottom: 18px;
 }
 
-.overview-grid {
+.overview-description {
+    margin: 0 0 25px;
+    padding: 0 2px;
+    color: var(--gray-dark);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.overview-general {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    border: 1px solid var(--line);
-    background: var(--line);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.overview-categories {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
 }
 
 .overview-card {
     position: relative;
-    min-height: 145px;
-    padding: 25px;
+    min-width: 0;
+    padding: 25px 27px 26px 30px;
+    border: 1px solid var(--line);
     background: var(--white);
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .overview-card:hover {
     background: #fafbfc;
+    transform: translateY(-2px);
 }
 
 .overview-card::before {
@@ -294,6 +290,14 @@ section {
     background: var(--red);
 }
 
+.general-card {
+    min-height: 135px;
+}
+
+.category-card {
+    min-height: 145px;
+}
+
 .overview-label {
     display: block;
     margin-bottom: 13px;
@@ -304,105 +308,37 @@ section {
     text-transform: uppercase;
 }
 
-.overview-stat {
+.overview-card strong {
     display: block;
-    color: var(--black);
+    margin-top: 8px;
+    color: var(--red);
     font-family: var(--font-display);
     font-size: 40px;
     font-weight: 700;
     line-height: 1;
 }
 
-.overview-card p,
-.overview-card .overview-description {
-    margin-top: 10px;
-    color: var(--gray-dark);
-    font-size: 11px;
-}
-
-#overview-total-posts,
-#overview-completed {
-    color: var(--red);
-}
-
-#status-han,
-#status-instagram,
-#status-twitter,
-#status-tiktok {
-    display: inline-block;
-    margin-top: 12px;
-    color: var(--gray-dark);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-/* =========================================
-   GENERAL STATS / PROGRESS
-   ========================================= */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
-    margin: 30px 0;
-}
-
-.stat-box {
-    padding: 22px;
-    border: 1px solid var(--line);
-    background: var(--white);
-}
-
-.stat-box h3 {
-    color: var(--gray-dark);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-.stat-box p,
-.stat-box span {
+.overview-status {
     display: block;
-    margin-top: 8px;
-    color: var(--black);
-    font-family: var(--font-display);
-    font-size: 34px;
+    margin-top: 14px;
+    color: var(--gray-dark);
+    font-size: 9px;
     font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
 }
 
-.progress-section {
-    margin: 30px 0;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 7px;
-    overflow: hidden;
-    background: var(--ice);
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--red);
-    transition: width 0.3s ease;
-}
-
-/* =========================================
-   POSTS SECTION
-   ========================================= */
+/* POSTS SECTION */
 
 .posts-section {
-    margin-top: 50px;
-    margin-bottom: 70px;
+    margin-top: 55px;
+    margin-bottom: 75px;
 }
 
 #posts-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    gap: 22px;
 }
 
 .post-card {
@@ -431,7 +367,7 @@ section {
 }
 
 .post-info {
-    padding: 22px;
+    padding: 24px;
 }
 
 .post-info h3 {
@@ -443,7 +379,7 @@ section {
     text-transform: uppercase;
 }
 
-.post-info p {
+.post-info > p {
     margin-top: 8px;
     color: var(--gray-dark);
     font-size: 11px;
@@ -461,7 +397,9 @@ section {
     padding-top: 14px;
     border-top: 1px solid var(--line);
     color: var(--gray-dark);
-    font-size: 11px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .post-stats strong {
@@ -473,7 +411,7 @@ section {
 .engagement-badge {
     display: inline-block;
     width: fit-content;
-    margin-top: 14px;
+    margin: 14px 24px 20px;
     padding: 6px 9px;
     background: var(--ice);
     color: var(--charcoal);
@@ -483,14 +421,19 @@ section {
     text-transform: uppercase;
 }
 
-.engagement-badge.completed {
-    background: var(--red);
-    color: var(--white);
+/* EMPTY STATES */
+
+.empty-state,
+.no-posts {
+    grid-column: 1 / -1;
+    padding: 45px 20px;
+    border: 1px dashed var(--line);
+    color: var(--gray-dark);
+    text-align: center;
+    font-size: 12px;
 }
 
-/* =========================================
-   POST MODAL
-   ========================================= */
+/* POST MODAL */
 
 .modal {
     position: fixed;
@@ -499,7 +442,7 @@ section {
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 28px;
     background: rgba(8, 10, 12, 0.78);
     backdrop-filter: blur(5px);
 }
@@ -511,16 +454,19 @@ section {
 .modal-content {
     position: relative;
     width: min(100%, 560px);
-    max-height: 90vh;
+    max-height: min(88vh, 780px);
     overflow-y: auto;
-    padding: 38px;
+    padding: 42px;
+    border: 1px solid rgba(16, 18, 20, 0.08);
     border-top: 4px solid var(--red);
+    border-radius: 4px;
     background: var(--white);
     box-shadow: 0 20px 70px rgba(0,0,0,0.25);
 }
 
 #modal-title {
     margin-bottom: 12px;
+    padding-right: 28px;
     color: var(--black);
     font-family: var(--font-display);
     font-size: 36px;
@@ -529,7 +475,7 @@ section {
     text-transform: uppercase;
 }
 
-#modal-platform {
+.modal-subtitle {
     margin-bottom: 18px;
     color: var(--red);
     font-size: 10px;
@@ -538,21 +484,22 @@ section {
     text-transform: uppercase;
 }
 
-#modal-description {
+.modal-description {
     margin-bottom: 25px;
     color: var(--gray-dark);
     font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
 #close-modal,
 #close-comment-modal {
     position: absolute;
-    top: 14px;
+    top: 16px;
     right: 17px;
     width: 34px;
     height: 34px;
     border: 1px solid var(--line);
+    border-radius: 2px;
     background: var(--white);
     color: var(--black);
     font-size: 21px;
@@ -574,6 +521,7 @@ section {
     margin-top: 12px;
     padding: 13px 18px;
     border: 0;
+    border-radius: 2px;
     background: var(--black);
     color: var(--white);
     font-size: 11px;
@@ -586,6 +534,11 @@ section {
 
 #open-post-btn:hover {
     background: var(--charcoal);
+}
+
+#open-post-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
 #mark-completed-btn {
@@ -602,63 +555,66 @@ section {
     opacity: 0.7;
 }
 
-.post-instructions {
-    margin: 22px 0;
-    padding: 17px;
-    border-left: 3px solid var(--red);
-    background: var(--snow);
-    color: var(--gray-dark);
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-/* =========================================
-   ACTION BUTTONS
-   ========================================= */
-
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 20px;
-}
-
-.action-btn {
-    flex: 1 1 auto;
-    min-width: 75px;
-    padding: 11px 13px;
-    border: 1px solid var(--line);
+#open-comment-generator-btn {
+    display: block;
+    width: 100%;
+    min-height: 45px;
+    margin-top: 10px;
+    padding: 12px 16px;
+    border: 1px solid var(--black);
+    border-radius: 2px;
     background: var(--white);
     color: var(--black);
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.7px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.2s ease;
 }
 
-.action-btn:hover {
-    border-color: var(--black);
+#open-comment-generator-btn:hover {
     background: var(--black);
     color: var(--white);
 }
 
-.action-btn.completed {
-    border-color: var(--red);
-    background: var(--red);
-    color: var(--white);
+#open-comment-generator-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
-/* =========================================
-   COMMENT GENERATOR MODAL
-   ========================================= */
+/* INTERACTION GUIDE */
+
+.post-instructions {
+    margin: 22px 0;
+    padding: 21px;
+    border-left: 3px solid var(--red);
+    background: var(--snow);
+}
+
+.post-instructions h3 {
+    margin-bottom: 9px;
+    color: var(--black);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.post-instructions p {
+    color: var(--gray-dark);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* COMMENT GENERATOR MODAL */
 
 #comment-modal .modal-content {
     width: min(100%, 600px);
 }
 
 #comment-modal h2 {
-    margin-bottom: 25px;
+    margin-bottom: 22px;
+    padding-right: 28px;
     color: var(--black);
     font-family: var(--font-display);
     font-size: 34px;
@@ -673,7 +629,7 @@ section {
     margin-bottom: 18px;
     padding: 10px 13px;
     border: 1px solid var(--line);
-    border-radius: 0;
+    border-radius: 2px;
     background: var(--white);
     color: var(--black);
     font-size: 12px;
@@ -683,6 +639,7 @@ section {
     min-height: 120px;
     padding: 18px;
     border: 1px solid var(--line);
+    border-radius: 2px;
     background: var(--snow);
     color: var(--black);
     font-size: 13px;
@@ -693,7 +650,7 @@ section {
 .comment-buttons {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
+    gap: 10px;
     margin-top: 16px;
 }
 
@@ -704,6 +661,7 @@ section {
     min-height: 45px;
     padding: 11px 14px;
     border: 1px solid var(--black);
+    border-radius: 2px;
     background: var(--black);
     color: var(--white);
     font-size: 10px;
@@ -721,13 +679,19 @@ section {
     background: var(--red);
 }
 
+#open-instagram-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
 #hashtags {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
     margin-top: 22px;
-    padding: 16px;
+    padding: 17px;
     border: 1px solid var(--line);
+    border-radius: 2px;
     background: var(--snow);
 }
 
@@ -742,30 +706,13 @@ section {
     margin-top: 10px;
 }
 
-/* =========================================
-   EMPTY STATES / GENERAL TEXT
-   ========================================= */
-
-.empty-state,
-.no-posts {
-    grid-column: 1 / -1;
-    padding: 45px 20px;
-    border: 1px dashed var(--line);
-    color: var(--gray-dark);
-    text-align: center;
-    font-size: 12px;
-}
-
-small,
-.caption {
-    color: var(--gray-dark);
-}
-
-/* =========================================
-   RESPONSIVE — TABLET
-   ========================================= */
+/* TABLET */
 
 @media (max-width: 900px) {
+    :root {
+        --page-gutter: 30px;
+    }
+
     .hero {
         min-height: 340px;
         padding: 55px 6%;
@@ -776,25 +723,32 @@ small,
         opacity: 0.5;
     }
 
+    .overview-categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     #posts-container {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .overview-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .overview-card {
+        padding: 23px 22px 23px 27px;
     }
 }
 
-
+/* MOBILE */
 
 @media (max-width: 600px) {
+    :root {
+        --page-gutter: 18px;
+    }
+
     body {
         font-size: 13px;
     }
 
-    main,
-    main.container {
-        width: calc(100% - 30px);
+    section {
+        margin-top: 38px;
     }
 
     .hero {
@@ -802,7 +756,7 @@ small,
         padding: 48px 24px;
     }
 
-    .hero > span:first-child {
+    .hero .subtitle {
         font-size: 9px;
         letter-spacing: 2px;
     }
@@ -811,7 +765,7 @@ small,
         font-size: clamp(46px, 13vw, 66px);
     }
 
-    .hero .subtitle {
+    .hero .hero-description {
         max-width: 260px;
         font-size: 10px;
         line-height: 1.7;
@@ -823,16 +777,12 @@ small,
         right: -130px;
     }
 
-    section {
-        margin-top: 35px;
-    }
-
     .section-title {
         font-size: 28px;
     }
 
     .tabs {
-        margin: 25px 0 30px;
+        margin: 0;
     }
 
     .tab-btn {
@@ -841,20 +791,34 @@ small,
         font-size: 9px;
     }
 
-    .overview-section > h2 {
-        font-size: 29px;
+    .overview-section {
+        margin-top: 36px;
     }
 
-    .overview-grid {
-        grid-template-columns: 1fr 1fr;
+    .overview-description {
+        margin-bottom: 20px;
+    }
+
+    .overview-general {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .overview-categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .overview-general {
+        margin-bottom: 12px;
     }
 
     .overview-card {
         min-height: 125px;
-        padding: 17px 15px;
+        padding: 19px 16px 19px 20px;
     }
 
-    .overview-stat {
+    .overview-card strong {
         font-size: 33px;
     }
 
@@ -863,59 +827,73 @@ small,
         letter-spacing: 1px;
     }
 
+    .overview-status {
+        font-size: 8px;
+        line-height: 1.5;
+    }
+
+    .posts-section {
+        margin-top: 44px;
+        margin-bottom: 55px;
+    }
+
     #posts-container {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 16px;
     }
 
     .post-info {
-        padding: 18px;
+        padding: 19px;
     }
 
     .post-info h3 {
         font-size: 23px;
     }
 
+    .engagement-badge {
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+
+    /* Modals on mobile */
+
     .modal {
-        align-items: flex-end;
-        padding: 0;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
     }
 
     .modal-content {
         width: 100%;
-        max-height: 90vh;
-        padding: 32px 22px 25px;
-        border-top-width: 4px;
+        max-width: 480px;
+        max-height: 88vh;
+        padding: 36px 23px 26px;
+        border-radius: 4px;
     }
 
     #modal-title {
         font-size: 31px;
-        padding-right: 25px;
+        padding-right: 28px;
+    }
+
+    #comment-modal .modal-content {
+        width: 100%;
     }
 
     #comment-modal h2 {
         font-size: 30px;
-        padding-right: 25px;
+        padding-right: 28px;
     }
 
     .comment-buttons {
         grid-template-columns: 1fr;
     }
-
-    .actions {
-        gap: 7px;
-    }
-
-    .action-btn {
-        min-width: 65px;
-        padding: 10px 8px;
-        font-size: 9px;
-    }
 }
 
+/* SMALL MOBILE */
 
 @media (max-width: 360px) {
-    .overview-grid {
+    .overview-categories {
         grid-template-columns: 1fr;
     }
 
@@ -925,5 +903,13 @@ small,
 
     .hero h1 {
         font-size: 43px;
+    }
+
+    .modal {
+        padding: 12px;
+    }
+
+    .modal-content {
+        padding: 34px 18px 22px;
     }
 }
