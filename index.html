@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HAN × CANADA GOOSE FW26 | Engagement Tracker</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css?v=6">
+</head>
+
+<body>
+
+<header class="hero">
+
+
+<h1>
+HAN JISUNG
+<span>ENGAGEMENT TRACKER</span>
+</h1>
+
+<p class="hero-description">
+SUPPORT HAN'S GLOBAL CAMPAIGN PRESENCE
+</p>
+
+</header>
+
+
+
+<nav class="tabs">
+
+<button class="tab-btn active" data-filter="han">
+HAN (@_doolsetnet)
+</button>
+
+<button class="tab-btn" data-filter="instagram">
+INSTAGRAM
+</button>
+
+<button class="tab-btn" data-filter="twitter">
+TWITTER / X
+</button>
+
+<button class="tab-btn" data-filter="tiktok">
+TIKTOK
+</button>
+
+</nav>
+
+
+
+<section class="overview-section">
+
+<h2 class="section-title">
+POST INTERACTION OVERVIEW
+</h2>
+
+<p class="overview-description">
+A collective overview of our engagement and progress across all campaign posts.
+</p>
+
+
+
+<div class="overview-general">
+
+<div class="overview-card general-card">
+
+<span class="overview-label">TOTAL POSTS</span>
+
+<strong id="overview-total-posts">0</strong>
+
+</div>
+
+<div class="overview-card general-card">
+
+<span class="overview-label">COMPLETED INTERACTIONS</span>
+
+<strong id="overview-completed">0</strong>
+
+</div>
+
+</div>
+
+
+
+<div class="overview-categories">
+
+<div class="overview-card category-card" data-category="han">
+
+<span class="overview-label">HAN (@_doolsetnet)</span>
+
+<strong id="overview-han">0</strong>
+
+<span class="overview-status" id="status-han">
+Needs more interactions
+</span>
+
+</div>
+
+
+<div class="overview-card category-card" data-category="instagram">
+
+<span class="overview-label">INSTAGRAM</span>
+
+<strong id="overview-instagram">0</strong>
+
+<span class="overview-status" id="status-instagram">
+Needs more interactions
+</span>
+
+</div>
+
+
+<div class="overview-card category-card" data-category="twitter">
+
+<span class="overview-label">TWITTER / X</span>
+
+<strong id="overview-twitter">0</strong>
+
+<span class="overview-status" id="status-twitter">
+Needs more interactions
+</span>
+
+</div>
+
+
+<div class="overview-card category-card" data-category="tiktok">
+
+<span class="overview-label">TIKTOK</span>
+
+<strong id="overview-tiktok">0</strong>
+
+<span class="overview-status" id="status-tiktok">
+Needs more interactions
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="posts-section">
+
+<h3 class="section-title">
+SELECT A POST TO SUPPORT
+</h3>
+
+<div id="posts-container"></div>
+
+</section>
+
+
+
+<div id="modal" class="modal">
+
+<div class="modal-content">
+
+<button id="close-modal" type="button">
+✕
+</button>
+
+<p class="modal-subtitle" id="modal-platform">
+CAMPAIGN POST
+</p>
+
+<h2 id="modal-title">
+Post Title
+</h2>
+
+<div id="modal-description" class="modal-description"></div>
+
+
+
+<button id="open-post-btn" type="button">
+OPEN POST
+</button>
+
+
+<!-- INTERACTION ACTIONS -->
+
+<div class="actions">
+
+<button class="action-btn" data-action="like" type="button">
+❤️ Like
+</button>
+
+<button class="action-btn" data-action="comment" type="button">
+💬 Comment
+</button>
+
+<button class="action-btn" data-action="share" type="button">
+📤 Share
+</button>
+
+<button class="action-btn" data-action="save" type="button">
+🔖 Save
+</button>
+
+<button class="action-btn" data-action="repost" type="button">
+🔁 Repost
+</button>
+
+</div>
+
+
+
+<div class="post-instructions">
+
+<h3>INTERACTION GUIDE</h3>
+
+<p>
+Support the post through the available actions. 
+Use original comments and engage naturally.
+</p>
+
+</div>
+
+
+
+<button id="mark-completed-btn" type="button">
+MARK AS COMPLETED
+</button>
+
+</div>
+
+</div>
+
+
+
+<div id="comment-modal" class="modal">
+
+<div class="modal-content">
+
+<button id="close-comment-modal" type="button">
+✕
+</button>
+
+<h2>COMMENT GENERATOR</h2>
+
+<p class="modal-subtitle">
+HAN × CANADA GOOSE FW26
+</p>
+
+
+<select id="comment-language">
+
+<option value="english">English</option>
+<option value="spanish">Spanish</option>
+<option value="korean">Korean</option>
+<option value="japanese">Japanese</option>
+<option value="portuguese">Portuguese</option>
+<option value="italian">Italian</option>
+<option value="russian">Russian</option>
+<option value="german">German</option>
+<option value="polish">Polish</option>
+<option value="turkish">Turkish</option>
+
+</select>
+
+
+<div id="generated-comment">
+Generate a comment
+</div>
+
+
+<div class="comment-buttons">
+
+<button id="pick-comment-btn" type="button">
+🎲 Pick a comment
+</button>
+
+<button id="copy-comment-btn" type="button">
+📋 Copy comment
+</button>
+
+<button id="open-instagram-btn" type="button">
+📱 Open post
+</button>
+
+</div>
+
+
+<div id="hashtags"></div>
+
+
+<button id="copy-hashtags-btn" type="button">
+📋 Copy hashtags
+</button>
+
+</div>
+
+</div>
+
+
+<script src="data/posts.js"></script>
+<script src="data/comments.js"></script>
+<script type="module" src="./app.js"></script>
+
+</body>
+</html>
