@@ -166,6 +166,24 @@ function createPostCard(post) {
   card.dataset.postId = post.id;
 
   card.innerHTML = `
+    <div class="post-thumbnail">
+
+      ${
+        post.image
+          ? `<img
+              src="${escapeHTML(post.image)}"
+              alt="${escapeHTML(getPostTitle(post))}"
+              loading="lazy"
+            >`
+          : ""
+      }
+
+      <div class="post-thumbnail-fallback">
+        IMAGE UNAVAILABLE
+      </div>
+
+    </div>
+
     <div class="post-info">
 
       <h3>${escapeHTML(getPostTitle(post))}</h3>
@@ -189,6 +207,21 @@ function createPostCard(post) {
     </div>
   `;
 
+  const thumbnail = card.querySelector(".post-thumbnail");
+  const image = thumbnail.querySelector("img");
+  const fallback = thumbnail.querySelector(
+    ".post-thumbnail-fallback"
+  );
+
+  if (image) {
+    image.addEventListener("error", () => {
+      image.remove();
+      fallback.style.display = "flex";
+    });
+  } else {
+    fallback.style.display = "flex";
+  }
+
   card.addEventListener("click", () => {
     openModal(post);
   });
@@ -197,6 +230,8 @@ function createPostCard(post) {
 
   watchPostStats(post);
 }
+
+
 
 if (
   Array.isArray(window.posts) &&
