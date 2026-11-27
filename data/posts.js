@@ -14,6 +14,24 @@ window.posts = [
     platform: "han",
     link: "https://www.instagram.com/share/BAVXnVG8iP",
   },
+  {
+    id: "han_003",
+    title: "WKorea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6rY4x9cu",
+  },
+  {
+    id: "han_004",
+    title: "HIP KR",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO63xITBF4",
+  },
+  {
+    id: "han_005",
+    title: "Halcyon Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6fvqBQrm",
+  },
 
 /* twitter */
 
