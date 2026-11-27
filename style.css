@@ -257,7 +257,7 @@ section {
 
 .overview-categories {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 16px;
 }
 
@@ -286,7 +286,8 @@ section {
 }
 
 .overview-card[data-category="han"]::before,
-.overview-card[data-category="twitter"]::before {
+.overview-card[data-category="twitter"]::before,
+.overview-card[data-category="naver"]::before {
     background: var(--red);
 }
 
