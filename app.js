@@ -303,20 +303,18 @@ if (markCompletedBtn) {
 
 
 
-document.querySelectorAll(
-  "#modal .action-btn"
-).forEach(button => {
-  const action = button.dataset.action;
+const openCommentBtn = document.createElement("button");
 
-  if (action === "comment") {
-    button.addEventListener("click", () => {
-      if (commentModal) {
-        commentModal.classList.add("active");
-      }
-    });
-  } else {
-    button.hidden = true;
-  }
+openCommentBtn.type = "button";
+openCommentBtn.textContent = "OPEN COMMENT GENERATOR";
+openCommentBtn.id = "open-comment-generator";
+
+if (modalDescription) {
+  modalDescription.after(openCommentBtn);
+}
+
+openCommentBtn.addEventListener("click", () => {
+  commentModal?.classList.add("active");
 });
 
 
