@@ -32,6 +32,18 @@ window.posts = [
     platform: "instagram",
     link: "https://www.instagram.com/reel/DgO6fvqBQrm",
   },
+  {
+    id: "instagram_004",
+    title: "WWD Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6hhdyGJc",
+  },
+  {
+    id: "instagram_005",
+    title: "Eyes Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6DivC4CW",
+  },
 
 /* twitter */
 
