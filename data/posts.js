@@ -44,6 +44,61 @@ window.posts = [
     platform: "instagram",
     link: "https://www.instagram.com/reel/DgO6DivC4CW",
   },
+  {
+    id: "instagram_006",
+    title: "Fast Paper Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6JQ9Pgib",
+  },
+  {
+    id: "instagram_007",
+    title: "Hweek Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO69YMxalg",
+  },
+  {
+    id: "instagram_008",
+    title: "Pin Page Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO67VGTdeF",
+  },
+  {
+    id: "instagram_009",
+    title: "PAP Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO67VGTdeF",
+  },
+{
+    id: "instagram_010",
+    title: "YMagazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO7T_zz6Zp",
+  },
+  {
+    id: "instagram_011",
+    title: "Neighbor Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO7aERBKVJ",
+  },
+  {
+    id: "instagram_012",
+    title: "Daily Fashion News",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO7DjKzTjI",
+  },
+  {
+    id: "instagram_013",
+    title: "Fast PaperMagazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO744-hnXK",
+  },
+  {
+    id: "instagram_014",
+    title: "MMM Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO7_5Ny4s_",
+  },
+
 
 /* twitter */
 
