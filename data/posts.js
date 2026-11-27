@@ -98,7 +98,114 @@ window.posts = [
     platform: "instagram",
     link: "https://www.instagram.com/reel/DgO7_5Ny4s_",
   },
-
+{
+    id: "instagram_015",
+    title: "Luxury Edits",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO72vPR00Y",
+  },
+  {
+    id: "instagram_016",
+    title: "Cosmopolitan",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO8UwfIbMw",
+  },
+  {
+    id: "instagram_017",
+    title: "Hype Beast Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6azhzDEK",
+  },
+  {
+    id: "instagram_018",
+    title: "Hype Beast Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO8hc2zchB",
+  },
+  {
+    id: "instagram_019",
+    title: "Hype Jack",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO7Nu5tE9J",
+  },
+  {
+    id: "instagram_020",
+    title: "Hweek Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO8xn0RoeD",
+  },
+  {
+    id: "instagram_021",
+    title: "Halcyon Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/p/DgO9jjcIWJn",
+  },
+  {
+    id: "instagram_022",
+    title: "Pepperit Magazine",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO9XGYKn6R",
+  },
+  {
+    id: "instagram_023",
+    title: "DayOff Mag",
+    platform: "instagram",
+    link: "https://www.instagram.com/share/BAgnXSxqea",
+  },
+  {
+    id: "instagram_024",
+    title: "nomadnew",
+    platform: "instagram",
+    link: "https://www.instagram.com/share/BAb006azmf",
+  },
+  {
+    id: "instagram_025",
+    title: "Celeb Fashion",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6XCkyB9f",
+  },
+  {
+    id: "instagram_026",
+    title: "Noblesse Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO6Y_KxiHN",
+  },
+  {
+    id: "instagram_027",
+    title: "Eyes Mag",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO9PT_C6yE",
+  },
+  {
+    id: "instagram_028",
+    title: "Top Star News",
+    platform: "instagram",
+    link: "https://www.instagram.com/p/DgO983lDyMk",
+  },
+  {
+    id: "instagram_029",
+    title: "Celeb Fashion",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO9je0SzBo",
+  },
+  {
+    id: "instagram_030",
+    title: "L'Officiel Hommes",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO_gzxyqIW",
+  },
+  {
+    id: "instagram_031",
+    title: "Hip Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO_5QRSEXO",
+  },
+  {
+    id: "instagram_032",
+    title: "PinPage",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgO-8ZDTXx6",
+  },
 
 /* twitter */
 
