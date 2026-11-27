@@ -15,6 +15,12 @@ window.posts = [
     link: "https://www.instagram.com/share/BAVXnVG8iP",
   },
   {
+    id: "han_003",
+    title: "Stray Kids Official",
+    platform: "han",
+    link: "https://x.com/Stray_Kids/status/2126201982532931748?a=Jx1QM3aDu1BzC2FWjcg&s=19",
+  },
+  {
     id: "instagram_001",
     title: "WKorea",
     platform: "instagram",
@@ -209,6 +215,109 @@ window.posts = [
 
 /* twitter */
 
+  {
+    id: "twitter_001",
+    title: "TOPSTARNEWS",
+    platform: "twitter",
+    link: "https://x.com/topstarnews/status/2126186796237426822?a=HZis39Xl7lBqhRoiNog&s=19",
+  },
+  {
+    id: "twitter_002",
+    title: "TV Daily News",
+    platform: "twitter",
+    link: "https://x.com/tvdailynews/status/2126188908836950499?a=LuSwOpB_sPJD8HGWCXU&s=19",
+  },
+  {
+    id: "twitter_003",
+    title: "Korea Dispatch",
+    platform: "twitter",
+    link: "https://x.com/Dicon_korea/status/2126188473627615585?a=V_JQ__dbiw4TmOvsBJw&s=19",
+  },
+  {
+    id: "twitter_004",
+    title: "NEWSINSTAR",
+    platform: "twitter",
+    link: "https://x.com/newsinstar/status/2126190953501430126?a=qAy7Za1IIa9MRZy2a_k&s=19",
+  },
+  {
+    id: "twitter_005",
+    title: "TV Daily News",
+    platform: "twitter",
+    link: "https://x.com/tvdailynews/status/2126196379953611155?a=2wIJyEHas1d20j1E-ws&s=19",
+  },
+  {
+    id: "twitter_006",
+    title: "TV Daily News",
+    platform: "twitter",
+    link: "https://x.com/tvdailynews/status/2126192304776176079?a=gvMo_-KbYCLzphkoJCk&s=19",
+  },
+  {
+    id: "twitter_007",
+    title: "iMBC News",
+    platform: "twitter",
+    link: "https://x.com/imbcenews/status/2126195530233790825?a=tmSTZrXmpyHtu7bCYT4&s=19",
+  },
+  {
+    id: "twitter_008",
+    title: "iMBC News",
+    platform: "twitter",
+    link: "https://x.com/imbcenews/status/2126195708525195357?a=-HYI2Pkj11DsxOUJZag&s=19",
+  },
+{
+    id: "twitter_009",
+    title: "Y Magazine",
+    platform: "twitter",
+    link: "https://x.com/ymag_kr/status/2126194200853254248?a=RDOy0QlRQ5yppktezm4&s=19",
+  },
+  {
+    id: "twitter_010",
+    title: "iMBC News",
+    platform: "twitter",
+    link: "https://x.com/imbcenews/status/2126188996112039939?a=L0oPfogIIo3r4DxQKCc&s=19",
+  },
+  {
+    id: "twitter_011",
+    title: "Xports News",
+    platform: "twitter",
+    link: "https://x.com/xportsnews/status/2126186836884341124?a=aZ61eqc_PVzXXr6oe4I&s=19",
+  },
+  {
+    id: "twitter_012",
+    title: "Xports News",
+    platform: "twitter",
+    link: "https://x.com/xportsnews/status/2126186734782468211?a=f-krU0e-7796WkXVBbs&s=19",
+  },
+  {
+    id: "twitter_013",
+    title: "Xports News",
+    platform: "twitter",
+    link: "https://x.com/xportsnews/status/2126185985365205481?a=u6cMC4ISLzOw3yL780M&s=19",
+  },
+  {
+    id: "twitter_014",
+    title: "Single List",
+    platform: "twitter",
+    link: "https://x.com/slist2015/status/2126210225707593988?a=8Uj1-2RfCu1S8mBvF7M&s=19",
+  },
+{
+    id: "twitter_015",
+    title: "Danmee",
+    platform: "twitter",
+    link: "https://x.com/danmee17/status/2126200628020178973?a=Ep2Yb14GupXuLpRXYeg&s=19",
+  },  
+  {
+    id: "twitter_016",
+    title: "Entersia",
+    platform: "twitter",
+    link: "https://x.com/entersia/status/2126194739750060053?a=-AeX6BzeeXei3ViKgHU&s=19",
+  },
+  {
+    id: "twitter_017",
+    title: "K style",
+    platform: "twitter",
+    link: "https://x.com/Kstyle_news/status/2126208399708991734?a=QFalycDJUZMPfgHqUQ4&s=19",
+  },
+  
 /* tiktok */
 
 /* naver */
