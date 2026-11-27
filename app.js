@@ -11,6 +11,9 @@ const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalPlatform = document.getElementById("modal-platform");
 const modalDescription = document.getElementById("modal-description");
+const modalImage = document.getElementById("modal-image");
+const modalImageFallback = document.getElementById(
+  "modal-image-fallback");
 const openPostBtn = document.getElementById("open-post-btn");
 const closeModal = document.getElementById("close-modal");
 
@@ -129,6 +132,68 @@ function openExternalLink(url) {
   );
 }
 
+function updateModalImage(post) {
+
+  if (!modalImage || !modalImageFallback) return;
+
+  modalImage.hidden = true;
+  modalImage.removeAttribute("src");
+
+  modalImageFallback.style.display = "flex";
+
+  modalImage.onerror = () => {
+    modalImage.hidden = true;
+    modalImageFallback.style.display = "flex";
+  };
+
+  modalImage.onload = () => {
+    modalImage.hidden = false;
+    modalImageFallback.style.display = "none";
+  };
+
+  if (post.image) {
+    modalImage.src = post.image;
+    return;
+  }
+
+  const link = getPostLink(post);
+
+  if (!link) return;
+
+  queuePreview(async () => {
+
+    const response = await fetch(
+      `/preview?url=${encodeURIComponent(link)}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Preview unavailable");
+    }
+
+    return await response.json();
+
+  }).then(data => {
+
+    if (currentPost !== post) return;
+
+    if (!data.image) {
+      throw new Error("No preview image");
+    }
+
+    modalImage.src = data.image.replace(/&amp;/g, "&");
+
+  }).catch(error => {
+
+    if (currentPost !== post) return;
+
+    console.error("Modal thumbnail error:", error);
+
+    modalImage.hidden = true;
+    modalImageFallback.style.display = "flex";
+
+  });
+
+}
 
 
 if (hashtagsContainer) {
@@ -309,6 +374,7 @@ document.querySelectorAll(".tab-btn").forEach(button => {
 
 function openModal(post) {
   currentPost = post;
+    updateModalImage(post);
 
   const category = getPostCategory(post);
   const isNaver = category === "naver";
