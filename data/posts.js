@@ -212,6 +212,25 @@ window.posts = [
     platform: "instagram",
     link: "https://www.instagram.com/reel/DgO-8ZDTXx6",
   },
+  {
+    id: "instagram_033",
+    title: "DailyFashionNews",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgPDls5TQHw",
+  },
+  {
+    id: "instagram_034",
+    title: "WWD",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgPDFg3S2Hr",
+  },
+  {
+    id: "instagram_035",
+    title: "Dispatch Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/p/DgPCcj8kYy_",
+  },
+  
 
 /* twitter */
 
