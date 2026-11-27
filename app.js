@@ -182,7 +182,7 @@ async function loadPostThumbnail(post, image, fallback) {
       fallback.style.display = "flex";
     };
 
-    image.src = data.image;
+    image.src = data.image.replace(/&amp;/g, "&");
 
   } catch (error) {
     image.remove();
