@@ -16,7 +16,7 @@ export async function onRequestGet({ request }) {
 
     const response = await fetch(parsed.href, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; PreviewBot/1.0)",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
         "Accept": "text/html"
       },
       redirect: "follow"
@@ -27,18 +27,28 @@ export async function onRequestGet({ request }) {
     }
 
     const html = await response.text();
-
     const tags = html.match(/<meta\b[^>]*>/gi) || [];
+
+    function decodeEntities(value) {
+      return value
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;|&apos;/gi, "'")
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">");
+    }
 
     function getAttribute(tag, name) {
       const match = tag.match(
-  new RegExp(
-    name + "=[\"']([^\"']*)[\"']",
-    "i"
-  )
-);
+        new RegExp(
+          name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))",
+          "i"
+        )
+      );
 
-      return match ? match[1] : null;
+      return match
+        ? decodeEntities(match[1] || match[2] || match[3] || "")
+        : null;
     }
 
     let image = null;
@@ -55,7 +65,6 @@ export async function onRequestGet({ request }) {
         )
       ) {
         image = getAttribute(tag, "content");
-
         if (image) break;
       }
     }
