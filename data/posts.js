@@ -336,10 +336,66 @@ window.posts = [
     platform: "twitter",
     link: "https://x.com/Kstyle_news/status/2126208399708991734?a=QFalycDJUZMPfgHqUQ4&s=19",
   },
+  {
+    id: "twitter_018",
+    title: "Single List",
+    platform: "twitter",
+    link: "https://x.com/slist2015/status/2126210604688109707?a=wX7f7pql6vQHLPpmZk0&s=19",
+  },
+  {
+    id: "twitter_019",
+    title: "SBS Star",
+    platform: "twitter",
+    link: "https://x.com/SBS_star/status/2126218062571749815?a=0I14s3RYEA2qrV3xD8s&s=19",
+  },
+  {
+    id: "twitter_020",
+    title: "SBS Star",
+    platform: "twitter",
+    link: "https://x.com/SBS_star/status/2126218072185041323?a=NQ500RYO1hb0HA--PQA&s=19",
+  },
+  {
+    id: "twitter_021",
+    title: "Enterasia",
+    platform: "twitter",
+    link: "https://x.com/entersia/status/2126194792845758945?a=i_j0mzUg-BllS2eJNWQ&s=19",
+  },
+  {
+    id: "twitter_022",
+    title: "Single List",
+    platform: "twitter",
+    link: "https://x.com/slist2015/status/2126210018597028241?a=ViZh3lMx5rn4A56ET2s&s=19",
+  },
+  {
+    id: "twitter_023",
+    title: "Single List",
+    platform: "twitter",
+    link: "https://x.com/slist2015/status/2126210419308298647?a=4YvD2NUaAgpyXqR6_Lc&s=19",
+  },
   
 /* tiktok */
 
+  {
+    id: "tiktok_001",
+    title: "W Korea",
+    platform: "tiktok",
+    link: "https://vt.tiktok.com/ZSsBhNexo/",
+  },
+  {
+    id: "tiktok_002",
+    title: "Hweek Magazine",
+    platform: "tiktok",
+    link: "https://vt.tiktok.com/ZSsBhdWUf/",
+  },
+  {
+    id: "tiktok_003",
+    title: "TOPSTARNEWS",
+    platform: "tiktok",
+    link: "https://vt.tiktok.com/ZSsBrTpfe/",
+  },
+  
 /* naver */
+  
   {
     id: "naver_001",
     title: "Naver 1",
