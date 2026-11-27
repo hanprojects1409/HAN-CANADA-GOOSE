@@ -243,10 +243,28 @@ window.posts = [
     link: "https://www.instagram.com/share/BAKmmv9l5V",
   },
   {
-    id: "instagram_008",
+    id: "instagram_038",
     title: "Jay Lim Photographer",
     platform: "instagram",
     link: "https://www.instagram.com/share/BBwwMaJGJF",
+  },
+  {
+    id: "instagram_039",
+    title: "Dazed Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgPT7mROf55",
+  },
+  {
+    id: "instagram_040",
+    title: "W Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgPoAPQxERl",
+  },
+  {
+    id: "instagram_041",
+    title: "Harpers Bazaar Korea",
+    platform: "instagram",
+    link: "https://www.instagram.com/reel/DgPXMBlRol8",
   },
 
 /* twitter */
