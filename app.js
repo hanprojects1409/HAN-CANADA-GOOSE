@@ -487,20 +487,7 @@ openCommentBtn.addEventListener("click", () => {
 
 
 
-if (modal) {
-  modal.addEventListener("click", (event) => {
-    if (
-      event.target === closeModal ||
-      closeModal?.contains(event.target)
-    ) {
-      modal.classList.remove("active");
-    }
 
-    if (event.target === modal) {
-      modal.classList.remove("active");
-    }
-  });
-}
 
 if (closeCommentModal) {
   closeCommentModal.addEventListener("click", () => {
@@ -508,7 +495,21 @@ if (closeCommentModal) {
   });
 }
 
+if (closeModal) {
+  closeModal.onclick = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    modal.classList.remove("active");
+  };
+}
 
+if (modal) {
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+}
 
 if (pickCommentBtn) {
   pickCommentBtn.addEventListener("click", () => {
