@@ -230,7 +230,24 @@ window.posts = [
     platform: "instagram",
     link: "https://www.instagram.com/p/DgPCcj8kYy_",
   },
-  
+  {
+    id: "instagram_036",
+    title: "DailyFashionNews",
+    platform: "instagram",
+    link: "https://www.instagram.com/share/BAWinugyvy",
+  },
+  {
+    id: "instagram_037",
+    title: "KoreaTravelEasy",
+    platform: "instagram",
+    link: "https://www.instagram.com/share/BAKmmv9l5V",
+  },
+  {
+    id: "instagram_008",
+    title: "Jay Lim Photographer",
+    platform: "instagram",
+    link: "https://www.instagram.com/share/BBwwMaJGJF",
+  },
 
 /* twitter */
 
