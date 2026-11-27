@@ -22,38 +22,27 @@ export async function onRequestGet({ request }) {
       return jsonResponse({ image: null }, 400);
     }
 
-    const hostname = parsed.hostname.toLowerCase();
-
     const allowedHosts = [
       "instagram.com",
-      "www.instagram.com",
       "x.com",
-      "www.x.com",
       "twitter.com",
-      "www.twitter.com",
       "tiktok.com",
-      "www.tiktok.com",
-      "naver.com",
-      "www.naver.com",
-      "m.naver.com"
+      "naver.com"
     ];
+
+    const hostname = parsed.hostname.toLowerCase();
 
     const allowed = allowedHosts.some(host =>
       hostname === host || hostname.endsWith("." + host)
     );
 
     if (!allowed) {
-      return jsonResponse({ image: null }, 400);
+      return jsonResponse({ image: null, error: "Unsupported platform" }, 400);
     }
 
-    const cacheKey = new Request(
-      "https://preview-cache.local/" +
-      encodeURIComponent(parsed.href)
-    );
-
+    // Use the real Pages Function request as the cache key.
     const cache = caches.default;
-
-    const cached = await cache.match(cacheKey);
+    const cached = await cache.match(request);
 
     if (cached) {
       return cached;
@@ -66,34 +55,29 @@ export async function onRequestGet({ request }) {
     apiUrl.searchParams.set("url", parsed.href);
     apiUrl.searchParams.set("prefer", "og");
 
-    const response = await fetch(apiUrl.toString(), {
-      headers: {
-        "Accept": "application/json"
-      }
-    });
+    const response = await fetch(apiUrl.toString());
 
     if (!response.ok) {
       return jsonResponse({
         image: null,
-        error: "Metadata service unavailable",
+        error: "Metadata service error",
         status: response.status
       }, 502);
     }
 
     const result = await response.json();
-
     const image = result?.image?.url || null;
 
     const output = jsonResponse({ image });
 
-    await cache.put(cacheKey, output.clone());
+    await cache.put(request, output.clone());
 
     return output;
 
   } catch (error) {
     return jsonResponse({
       image: null,
-      error: "Preview request failed"
+      error: error.message
     }, 500);
   }
 }
