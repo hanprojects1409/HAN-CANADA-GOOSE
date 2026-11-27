@@ -302,19 +302,18 @@ if (markCompletedBtn) {
 }
 
 
-
 const openCommentBtn = document.createElement("button");
 
 openCommentBtn.type = "button";
+openCommentBtn.id = "open-comment-generator-btn";
 openCommentBtn.textContent = "OPEN COMMENT GENERATOR";
-openCommentBtn.id = "open-comment-generator";
 
 if (modalDescription) {
-  modalDescription.after(openCommentBtn);
+    modalDescription.after(openCommentBtn);
 }
 
 openCommentBtn.addEventListener("click", () => {
-  commentModal?.classList.add("active");
+    commentModal?.classList.add("active");
 });
 
 
