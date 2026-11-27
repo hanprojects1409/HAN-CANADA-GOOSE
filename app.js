@@ -28,20 +28,25 @@ const hashtagsContainer = document.getElementById("hashtags");
 
 const container = document.getElementById("posts-container");
 const markCompletedBtn = document.getElementById("mark-completed-btn");
+const postInstructions = document.getElementById(
+  "post-instructions"
+);
 
 
 const categories = [
   "han",
   "instagram",
   "twitter",
-  "tiktok"
+  "tiktok",
+  "naver"
 ];
 
 const categoryLabels = {
   han: "HAN (@_doolsetnet)",
   instagram: "Instagram",
   twitter: "Twitter / X",
-  tiktok: "TikTok"
+  tiktok: "TikTok",
+  naver: "Naver Articles"
 };
 
 const fixedHashtags = [
@@ -75,6 +80,10 @@ function getPostCategory(post) {
   const value = String(
     post.category || post.platform || ""
   ).toLowerCase();
+
+  if (value.includes("naver")) {
+    return "naver";
+  }
 
   if (
     value.includes("instagram") ||
@@ -222,13 +231,16 @@ document.querySelectorAll(".tab-btn").forEach(button => {
 function openModal(post) {
   currentPost = post;
 
+  const category = getPostCategory(post);
+  const isNaver = category === "naver";
+  const alreadyCompleted = completedThisSession.has(post.id);
+
   if (modalTitle) {
     modalTitle.textContent = getPostTitle(post);
   }
 
   if (modalPlatform) {
-    modalPlatform.textContent =
-      categoryLabels[getPostCategory(post)];
+    modalPlatform.textContent = categoryLabels[category];
   }
 
   if (modalDescription) {
@@ -236,28 +248,38 @@ function openModal(post) {
       getPostDescription(post);
   }
 
-  const postLink = getPostLink(post);
+  // Adapt modal according to post type
+
+  if (postInstructions) {
+    postInstructions.hidden = isNaver;
+  }
+
+  if (openCommentBtn) {
+    openCommentBtn.hidden = isNaver;
+  }
 
   if (openPostBtn) {
+    openPostBtn.textContent = isNaver
+      ? "OPEN ARTICLE"
+      : "OPEN POST";
+
     openPostBtn.onclick = () => {
-      openExternalLink(postLink);
-    }
+      openExternalLink(getPostLink(post));
+    };
   }
 
   if (openInstagramBtn) {
     openInstagramBtn.onclick = () => {
-      openExternalLink(postLink);
-    }
+      openExternalLink(getPostLink(post));
+    };
   }
 
   if (markCompletedBtn) {
-    markCompletedBtn.disabled =
-      completedThisSession.has(post.id);
+    markCompletedBtn.disabled = alreadyCompleted;
 
-    markCompletedBtn.textContent =
-      completedThisSession.has(post.id)
-        ? "Interaction recorded"
-        : "Mark as completed";
+    markCompletedBtn.textContent = alreadyCompleted
+      ? (isNaver ? "Article completed" : "Interaction recorded")
+      : "Mark as completed";
   }
 
   if (modal) {
@@ -285,7 +307,9 @@ if (markCompletedBtn) {
       completedThisSession.add(postId);
 
       markCompletedBtn.textContent =
-        "Interaction recorded";
+  getPostCategory(currentPost) === "naver"
+    ? "Article completed"
+    : "Interaction recorded";
 
     } catch (error) {
       console.error(
@@ -455,8 +479,9 @@ function updateOverview() {
     han: { posts: 0, activePosts: 0, interactions: 0 },
     instagram: { posts: 0, activePosts: 0, interactions: 0 },
     twitter: { posts: 0, activePosts: 0, interactions: 0 },
-    tiktok: { posts: 0, activePosts: 0, interactions: 0 }
-  };
+    tiktok: { posts: 0, activePosts: 0, interactions: 0 },
+    naver: { posts: 0, activePosts: 0, interactions: 0 }
+};
 
   posts.forEach(post => {
     const category = getPostCategory(post);
