@@ -156,7 +156,29 @@ if (copyHashtagsBtn) {
   });
 }
 
+async function loadPostThumbnail(post, image, fallback) {
+  const link = getPostLink(post);
 
+  if (!link || post.image) return;
+
+  try {
+    const response = await fetch(
+      `/preview?url=${encodeURIComponent(link)}`
+    );
+
+    if (!response.ok) throw new Error("Preview unavailable");
+
+    const data = await response.json();
+
+    if (!data.image) throw new Error("No preview image");
+
+    image.src = data.image;
+
+  } catch (error) {
+    image.remove();
+    fallback.style.display = "flex";
+  }
+}
 
 function createPostCard(post) {
   const card = document.createElement("article");
@@ -209,18 +231,25 @@ function createPostCard(post) {
 
   const thumbnail = card.querySelector(".post-thumbnail");
   const image = thumbnail.querySelector("img");
-  const fallback = thumbnail.querySelector(
-    ".post-thumbnail-fallback"
-  );
 
-  if (image) {
-    image.addEventListener("error", () => {
-      image.remove();
-      fallback.style.display = "flex";
-    });
-  } else {
+if (image) {
+  image.addEventListener("error", () => {
+    image.remove();
     fallback.style.display = "flex";
+  }, { once: true });
+
+  if (!post.image) {
+    image.hidden = true;
+
+    loadPostThumbnail(post, image, fallback).then(() => {
+      if (image.src && image.isConnected) {
+        image.hidden = false;
+      }
+    });
   }
+} else {
+  fallback.style.display = "flex";
+}
 
   card.addEventListener("click", () => {
     openModal(post);
