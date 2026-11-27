@@ -4,15 +4,15 @@ window.posts = [
 /* instagram */
   {
     id: "han_001",
-    title: "Instagram Post 1",
-    platform: "Instagram",
-    link: "https://instagram.com/",
+    title: "Canada Goose x Dazed Korea",
+    platform: "han",
+    link: "https://www.instagram.com/share/BCRiqZwPzh",
   },
   {
     id: "han_002",
-    title: "Instagram Post 2",
-    platform: "Instagram",
-    link: "https://instagram.com/",
+    title: "Canada Goose x Dazed Korea",
+    platform: "han",
+    link: "https://www.instagram.com/share/BAVXnVG8iP",
   },
 
 /* twitter */
