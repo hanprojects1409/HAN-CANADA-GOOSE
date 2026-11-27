@@ -1,5 +1,7 @@
 
 window.posts = [
+
+/* instagram */
   {
     id: "han_001",
     title: "Instagram Post 1",
@@ -14,6 +16,12 @@ window.posts = [
     link: "https://instagram.com/",
     image: "images/post2.jpg"
   },
+
+/* twitter */
+
+/* tiktok */
+
+/* naver */
   {
     id: "naver_001",
     title: "Naver Article 1",
