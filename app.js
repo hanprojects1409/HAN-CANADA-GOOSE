@@ -172,6 +172,16 @@ async function loadPostThumbnail(post, image, fallback) {
 
     if (!data.image) throw new Error("No preview image");
 
+    image.onload = () => {
+      image.hidden = false;
+      fallback.style.display = "none";
+    };
+
+    image.onerror = () => {
+      image.remove();
+      fallback.style.display = "flex";
+    };
+
     image.src = data.image;
 
   } catch (error) {
