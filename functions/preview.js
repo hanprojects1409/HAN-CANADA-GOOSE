@@ -32,11 +32,11 @@ export async function onRequestGet({ request }) {
 
     function getAttribute(tag, name) {
       const match = tag.match(
-        new RegExp(
-          name + '\\s*=\\s*["\\']([^"\\']*)["\\']',
-          "i"
-        )
-      );
+  new RegExp(
+    name + "=[\"']([^\"']*)[\"']",
+    "i"
+  )
+);
 
       return match ? match[1] : null;
     }
