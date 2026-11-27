@@ -707,6 +707,39 @@ section {
     margin-top: 10px;
 }
 
+
+
+/* POST THUMBNAILS */
+
+.post-thumbnail {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    background: #191d20;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.post-thumbnail-fallback {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #919191;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+
+
 /* TABLET */
 
 @media (max-width: 900px) {
