@@ -10,9 +10,6 @@ import {
   runTransaction
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
-// ==========================================
-// FIREBASE CONFIGURATION
-// ==========================================
 
 const firebaseConfig = {
   apiKey: "AIzaSyAa9NumsNv8tCPm50e2GmNIvL7g1T01Boo",
@@ -25,26 +22,20 @@ const firebaseConfig = {
   measurementId: "G-XYVJRDEMYK"
 };
 
-// ==========================================
-// INITIALIZE FIREBASE
-// ==========================================
+
 
 const app = initializeApp(firebaseConfig);
 
 export const db = getDatabase(app);
 
-// ==========================================
-// DATABASE REFERENCES
-// ==========================================
+
 
 export {
   ref,
   onValue
 };
 
-// ==========================================
-// RECORD POST INTERACTION
-// ==========================================
+
 
 export async function recordPostInteraction(postId) {
   if (!postId) {

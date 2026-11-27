@@ -6,9 +6,6 @@ import {
   recordPostInteraction
 } from "./firebase.js";
 
-// ==========================================
-// ELEMENTS
-// ==========================================
 
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
@@ -32,9 +29,6 @@ const hashtagsContainer = document.getElementById("hashtags");
 const container = document.getElementById("posts-container");
 const markCompletedBtn = document.getElementById("mark-completed-btn");
 
-// ==========================================
-// PROJECT SETTINGS
-// ==========================================
 
 const categories = [
   "han",
