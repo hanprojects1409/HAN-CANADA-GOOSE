@@ -22,8 +22,26 @@ window.posts = [
 /* naver */
   {
     id: "naver_001",
-    title: "Naver Article 1",
+    title: "Stray Kids HAN laughing",
     platform: "Naver",
-    link: "ARTICLE_URL"
-}
+    link: "https://naver.me/FWTpM8rw"
+},
+  {
+    id: "naver_002",
+    title: "SKZ HAN' voluminous facial features",
+    platform: "Naver",
+    link: "https://naver.me/FHOQEmIo"
+},
+  {
+    id: "naver_003",
+    title: "Stray Kids HAN's eye-catching visuals",
+    platform: "Naver",
+    link: "https://naver.me/FkaHBVoA"
+  },
+  {
+    id: "naver_004",
+    title: "SKZ HAN dressing warmly",
+    platform: "Naver",
+    link: "https://naver.me/F6QRrgv4"
+  }/
 ];
