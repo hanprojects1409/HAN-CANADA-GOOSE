@@ -13,5 +13,11 @@ window.posts = [
     platform: "Instagram",
     link: "https://instagram.com/",
     image: "images/post2.jpg"
-  }
+  },
+  {
+    id: "naver_001",
+    title: "Naver Article 1",
+    platform: "Naver",
+    link: "ARTICLE_URL"
+}
 ];
