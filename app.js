@@ -173,15 +173,21 @@ async function loadPostThumbnail(post, image, fallback) {
   if (!link || post.image) return;
 
   try {
-    const response = await queuePreview(() =>
-  fetch(`/preview?url=${encodeURIComponent(link)}`)
-);
+    const data = await queuePreview(async () => {
+      const response = await fetch(
+        `/preview?url=${encodeURIComponent(link)}`
+      );
 
-    if (!response.ok) throw new Error("Preview unavailable");
+      if (!response.ok) {
+        throw new Error("Preview unavailable");
+      }
 
-    const data = await response.json();
+      return await response.json();
+    });
 
-    if (!data.image) throw new Error("No preview image");
+    if (!data.image) {
+      throw new Error("No preview image");
+    }
 
     image.onload = () => {
       image.hidden = false;
