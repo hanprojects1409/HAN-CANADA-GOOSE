@@ -1026,3 +1026,94 @@ section {
         width: 105px !important;
     }
 }
+
+
+/* =================================
+   POST CARDS — COMPACT HORIZONTAL
+================================= */
+
+.post-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 16px !important;
+
+    padding: 14px !important;
+    width: 100% !important;
+    min-width: 0;
+    margin: 0 0 16px !important;
+
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+/* Image container */
+
+.post-thumbnail {
+    position: relative !important;
+
+    flex: 0 0 125px !important;
+    width: 125px !important;
+    height: 155px !important;
+
+    overflow: hidden !important;
+    border-radius: 10px !important;
+    background: #191d20;
+}
+
+/* Image */
+
+.post-thumbnail img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Fallback */
+
+.post-thumbnail-fallback {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 8px;
+    font-size: 10px;
+}
+
+/* Information */
+
+.post-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.post-info h3 {
+    overflow-wrap: anywhere;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .post-card {
+        gap: 12px !important;
+        padding: 10px !important;
+    }
+
+    .post-thumbnail {
+        flex-basis: 105px !important;
+        width: 105px !important;
+        height: 135px !important;
+    }
+
+    .post-info h3 {
+        font-size: 15px !important;
+    }
+
+}
