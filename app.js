@@ -156,15 +156,26 @@ if (copyHashtagsBtn) {
   });
 }
 
+
+
+let previewQueue = Promise.resolve();
+
+function queuePreview(task) {
+  const request = previewQueue.then(task);
+  previewQueue = request.catch(() => {});
+  return request;
+}
+
+
 async function loadPostThumbnail(post, image, fallback) {
   const link = getPostLink(post);
 
   if (!link || post.image) return;
 
   try {
-    const response = await fetch(
-      `/preview?url=${encodeURIComponent(link)}`
-    );
+    const response = await queuePreview(() =>
+  fetch(`/preview?url=${encodeURIComponent(link)}`)
+);
 
     if (!response.ok) throw new Error("Preview unavailable");
 
