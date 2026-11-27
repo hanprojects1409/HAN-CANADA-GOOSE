@@ -174,6 +174,7 @@ if (hashtagsContainer) {
 
 if (copyHashtagsBtn) {
   copyHashtagsBtn.addEventListener("click", async () => {
+    alert("ESTOY EJECUTANDO EL NUEVO APP.JS");
     try {
       await navigator.clipboard.writeText(
         fixedHashtags.join(" ")
