@@ -61,5 +61,5 @@ window.posts = [
     title: "SKZ HAN dressing warmly",
     platform: "Naver",
     link: "https://naver.me/F6QRrgv4"
-  }/
+  }
 ];
