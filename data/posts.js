@@ -323,26 +323,86 @@ window.posts = [
 /* naver */
   {
     id: "naver_001",
-    title: "Stray Kids HAN laughing",
+    title: "Naver 1",
     platform: "Naver",
     link: "https://naver.me/FWTpM8rw"
 },
   {
     id: "naver_002",
-    title: "SKZ HAN' voluminous facial features",
+    title: "Naver 2",
     platform: "Naver",
     link: "https://naver.me/FHOQEmIo"
 },
   {
     id: "naver_003",
-    title: "Stray Kids HAN's eye-catching visuals",
+    title: "Naver 3",
     platform: "Naver",
     link: "https://naver.me/FkaHBVoA"
   },
   {
     id: "naver_004",
-    title: "SKZ HAN dressing warmly",
+    title: "Naver 4",
     platform: "Naver",
     link: "https://naver.me/F6QRrgv4"
-  }
+  },
+  {
+    id: "naver_005",
+    title: "Naver 5",
+    platform: "Naver",
+    link: "https://naver.me/52aUK1xj"
+},
+  {
+    id: "naver_006",
+    title: "Naver 6",
+    platform: "Naver",
+    link: "https://naver.me/5MviRKhc"
+  },
+   {
+    id: "naver_007",
+    title: "Naver 7",
+    platform: "Naver",
+    link: "https://naver.me/FJOCeVit"
+   },
+   {
+    id: "naver_008",
+    title: "Naver 8",
+    platform: "Naver",
+    link: "https://naver.me/FyAz4IZW"
+},
+   {
+    id: "naver_009",
+    title: "Naver 9",
+    platform: "Naver",
+    link: "https://naver.me/5hoXqkhR"
+   },
+ {
+    id: "naver_010",
+    title: "Naver 10",
+    platform: "Naver",
+    link: "https://naver.me/FqIgnh8u"
+ },
+   {
+    id: "naver_011",
+    title: "Naver 11",
+    platform: "Naver",
+    link: "https://naver.me/FjmP0R99"
+   },
+ {
+    id: "naver_012",
+    title: "Naver 12",
+    platform: "Naver",
+    link: "https://naver.me/x1ulZrvI"
+ },
+   {
+    id: "naver_013",
+    title: "Naver 13",
+    platform: "Naver",
+    link: "https://naver.me/5CCV5S8L"
+   },
+   {
+    id: "naver_014",
+    title: "Naver 14",
+    platform: "Naver",
+    link: "https://naver.me/FnskObTJ"
+   }
 ];
