@@ -30,6 +30,7 @@ const hashtagsContainer = document.getElementById("hashtags");
 
 const container = document.getElementById("posts-container");
 const markCompletedBtn = document.getElementById("mark-completed-btn");
+markCompletedBtn.textContent = "APP JS LOADED";
 const postInstructions = document.getElementById("post-instructions");
 
 
