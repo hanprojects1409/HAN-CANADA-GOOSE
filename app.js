@@ -6,7 +6,6 @@ import {
   recordPostInteraction
 } from "./firebase.js";
 
-
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalPlatform = document.getElementById("modal-platform");
@@ -30,9 +29,7 @@ const hashtagsContainer = document.getElementById("hashtags");
 
 const container = document.getElementById("posts-container");
 const markCompletedBtn = document.getElementById("mark-completed-btn");
-markCompletedBtn.textContent = "APP JS LOADED";
 const postInstructions = document.getElementById("post-instructions");
-
 
 const categories = [
   "han",
@@ -61,43 +58,6 @@ const globalStats = {};
 const completedThisSession = new Set();
 
 
-/* ERROR MESSAGE */
-
-const interactionMessage = document.createElement("div");
-
-interactionMessage.id = "interaction-message";
-
-interactionMessage.style.display = "none";
-interactionMessage.style.marginTop = "12px";
-interactionMessage.style.padding = "12px";
-interactionMessage.style.border = "1px solid #555";
-interactionMessage.style.borderRadius = "6px";
-interactionMessage.style.fontSize = "13px";
-interactionMessage.style.lineHeight = "1.5";
-interactionMessage.style.overflowWrap = "anywhere";
-
-if (markCompletedBtn) {
-  markCompletedBtn.insertAdjacentElement(
-    "afterend",
-    interactionMessage
-  );
-}
-
-
-function showInteractionMessage(message, isError = false) {
-  interactionMessage.style.display = "block";
-  interactionMessage.style.color = isError ? "#ff7777" : "#ffffff";
-  interactionMessage.style.borderColor = isError ? "#b50b00" : "#555";
-  interactionMessage.textContent = message;
-}
-
-
-function hideInteractionMessage() {
-  interactionMessage.style.display = "none";
-  interactionMessage.textContent = "";
-}
-
-
 /* HELPERS */
 
 function escapeHTML(value) {
@@ -112,7 +72,6 @@ function escapeHTML(value) {
     })[character]
   );
 }
-
 
 function getPostCategory(post) {
   const value = String(
@@ -137,21 +96,17 @@ function getPostCategory(post) {
   return "han";
 }
 
-
 function getPostTitle(post) {
   return post.title || post.id;
 }
-
 
 function getPostDescription(post) {
   return post.description || post.caption || "";
 }
 
-
 function getPostLink(post) {
   return post.link || post.url || "";
 }
-
 
 function openExternalLink(url) {
   if (!url) return;
@@ -172,10 +127,8 @@ if (hashtagsContainer) {
     .join("");
 }
 
-
 if (copyHashtagsBtn) {
   copyHashtagsBtn.addEventListener("click", async () => {
-    alert("ESTOY EJECUTANDO EL NUEVO APP.JS");
     try {
       await navigator.clipboard.writeText(
         fixedHashtags.join(" ")
@@ -198,13 +151,11 @@ if (copyHashtagsBtn) {
 
 let previewQueue = Promise.resolve();
 
-
 function queuePreview(task) {
   const request = previewQueue.then(task);
   previewQueue = request.catch(() => {});
   return request;
 }
-
 
 function updateModalImage(post) {
   if (!modalImage || !modalImageFallback) return;
@@ -261,7 +212,6 @@ function updateModalImage(post) {
     modalImageFallback.style.display = "flex";
   });
 }
-
 
 async function loadPostThumbnail(post, image, fallback) {
   const link = getPostLink(post);
@@ -375,7 +325,6 @@ function createPostCard(post) {
   watchPostStats(post);
 }
 
-
 if (Array.isArray(window.posts) && container) {
   container.innerHTML = "";
   window.posts.forEach(createPostCard);
@@ -424,7 +373,6 @@ openCommentBtn.addEventListener("click", () => {
 function openModal(post) {
   currentPost = post;
 
-  hideInteractionMessage();
   updateModalImage(post);
 
   const category = getPostCategory(post);
@@ -494,14 +442,8 @@ if (markCompletedBtn) {
     markCompletedBtn.disabled = true;
     markCompletedBtn.textContent = "Recording...";
 
-    hideInteractionMessage();
-
-    showInteractionMessage(
-      `Sending interaction for ${postId}...`
-    );
-
     try {
-      const savedCount = await recordPostInteraction(postId);
+      await recordPostInteraction(postId);
 
       completedThisSession.add(postId);
 
@@ -510,42 +452,33 @@ if (markCompletedBtn) {
           ? "Article completed"
           : "Interaction recorded";
 
-      showInteractionMessage(
-        `SUCCESS: Firebase saved ${savedCount} interaction(s) for ${postId}.`
-      );
-
     } catch (error) {
-  markCompletedBtn.disabled = false;
-  markCompletedBtn.textContent = "Try again";
+      console.error("Firebase interaction error:", error);
 
-  alert(
-    "FIREBASE ERROR\n\n" +
-    "Code: " + (error?.code || "No error code") +
-    "\n\nMessage: " + (error?.message || String(error))
-  );
-}
+      markCompletedBtn.disabled = false;
+      markCompletedBtn.textContent = "Try again";
+    }
   });
 }
 
 
 /* MAIN MODAL CLOSING */
 
-document.addEventListener("click", event => {
-  if (!(event.target instanceof Element)) return;
-
-  const clickedCloseButton = event.target.closest("#close-modal");
-
-  if (clickedCloseButton) {
+if (closeModal) {
+  closeModal.addEventListener("click", event => {
     event.preventDefault();
     event.stopPropagation();
     modal?.classList.remove("active");
-    return;
-  }
+  });
+}
 
-  if (event.target === modal) {
-    modal?.classList.remove("active");
-  }
-}, true);
+if (modal) {
+  modal.addEventListener("click", event => {
+    if (event.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+}
 
 
 /* COMMENT MODAL CLOSING */
@@ -746,6 +679,5 @@ function updateOverview() {
     }
   });
 }
-
 
 updateOverview();
