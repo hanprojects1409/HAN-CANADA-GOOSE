@@ -513,19 +513,15 @@ if (markCompletedBtn) {
       );
 
     } catch (error) {
-      console.error("Error recording interaction:", error);
+  markCompletedBtn.disabled = false;
+  markCompletedBtn.textContent = "Try again";
 
-      markCompletedBtn.disabled = false;
-      markCompletedBtn.textContent = "Try again";
-
-      const errorCode = error?.code || "No error code";
-      const errorMessage = error?.message || String(error);
-
-      showInteractionMessage(
-        `FIREBASE ERROR\nCode: ${errorCode}\nMessage: ${errorMessage}`,
-        true
-      );
-    }
+  alert(
+    "FIREBASE ERROR\n\n" +
+    "Code: " + (error?.code || "No error code") +
+    "\n\nMessage: " + (error?.message || String(error))
+  );
+}
   });
 }
 
