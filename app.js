@@ -1,9 +1,10 @@
-
 import {
   db,
   ref,
   onValue,
-  recordPostInteraction
+  recordPostInteraction,
+  loadCompletedPosts,
+  completePostForCurrentUser
 } from "./firebase.js";
 
 const modal = document.getElementById("modal");
@@ -57,6 +58,66 @@ let currentPost = null;
 const globalStats = {};
 const completedThisSession = new Set();
 
+let completedLoaded = false;
+let completionLoadError = false;
+
+const completedReady = loadCompletedPosts()
+  .then(completedPosts => {
+
+    Object.entries(completedPosts).forEach(([postId, value]) => {
+      if (value === true) {
+        completedThisSession.add(postId);
+      }
+    });
+
+    completedLoaded = true;
+
+    if (currentPost) {
+      updateCompletedButton(currentPost);
+    }
+
+  })
+  .catch(error => {
+
+    console.error("Error loading completed posts:", error);
+
+    completionLoadError = true;
+
+  });
+
+function updateCompletedButton(post) {
+
+  if (!markCompletedBtn) return;
+
+  const isNaver = getPostCategory(post) === "naver";
+  const alreadyCompleted = completedThisSession.has(post.id);
+
+  if (alreadyCompleted) {
+
+    markCompletedBtn.disabled = true;
+
+    markCompletedBtn.textContent = isNaver
+      ? "Article completed"
+      : "Interaction recorded";
+
+  } else if (completionLoadError) {
+
+    markCompletedBtn.disabled = true;
+    markCompletedBtn.textContent = "Status unavailable";
+
+  } else if (!completedLoaded) {
+
+    markCompletedBtn.disabled = true;
+    markCompletedBtn.textContent = "Loading status...";
+
+  } else {
+
+    markCompletedBtn.disabled = false;
+    markCompletedBtn.textContent = "Mark as completed";
+
+  }
+
+}
 
 /* HELPERS */
 
@@ -413,13 +474,7 @@ function openModal(post) {
     };
   }
 
-  if (markCompletedBtn) {
-    markCompletedBtn.disabled = alreadyCompleted;
-
-    markCompletedBtn.textContent = alreadyCompleted
-      ? (isNaver ? "Article completed" : "Interaction recorded")
-      : "Mark as completed";
-  }
+  updateCompletedButton(post);
 
   if (modal) {
     modal.classList.add("active");
@@ -427,38 +482,61 @@ function openModal(post) {
 }
 
 
-/* RECORD INTERACTION */
+/* RECORD COMPLETED POST */
 
 if (markCompletedBtn) {
+
   markCompletedBtn.addEventListener("click", async () => {
+
     if (!currentPost) return;
 
-    if (completedThisSession.has(currentPost.id)) {
-      return;
-    }
+    if (!completedLoaded || completionLoadError) return;
 
-    const postId = currentPost.id;
+    if (completedThisSession.has(currentPost.id)) return;
+
+    const post = currentPost;
+    const postId = post.id;
 
     markCompletedBtn.disabled = true;
-    markCompletedBtn.textContent = "Recording...";
+    markCompletedBtn.textContent = "Saving...";
 
     try {
-      await recordPostInteraction(postId);
+
+      const newlyCompleted =
+        await completePostForCurrentUser(postId);
 
       completedThisSession.add(postId);
 
-      markCompletedBtn.textContent =
-        getPostCategory(currentPost) === "naver"
-          ? "Article completed"
-          : "Interaction recorded";
+      updateCompletedButton(post);
+
+      if (newlyCompleted) {
+
+        try {
+
+          await recordPostInteraction(postId);
+
+        } catch (counterError) {
+
+          console.error(
+            "Completion saved, but counter update failed:",
+            counterError
+          );
+
+        }
+
+      }
 
     } catch (error) {
-      console.error("Firebase interaction error:", error);
+
+      console.error("Error saving completed post:", error);
 
       markCompletedBtn.disabled = false;
       markCompletedBtn.textContent = "Try again";
+
     }
+
   });
+
 }
 
 
