@@ -187,68 +187,56 @@ function createPostCard(post) {
   card.dataset.category = getPostCategory(post);
   card.dataset.postId = post.id;
 
-  card.innerHTML = `
-    <div class="post-thumbnail">
+card.innerHTML = `
+  <div class="post-thumbnail">
 
-      ${
-        post.image
-          ? `<img
-              src="${escapeHTML(post.image)}"
-              alt="${escapeHTML(getPostTitle(post))}"
-              loading="lazy"
-            >`
-          : ""
-      }
+    <img
+      src="${post.image ? escapeHTML(post.image) : ""}"
+      alt="${escapeHTML(getPostTitle(post))}"
+      loading="lazy"
+      ${post.image ? "" : "hidden"}
+    >
 
-      <div class="post-thumbnail-fallback">
-        IMAGE UNAVAILABLE
-      </div>
-
+    <div class="post-thumbnail-fallback">
+      IMAGE UNAVAILABLE
     </div>
 
-    <div class="post-info">
+  </div>
 
-      <h3>${escapeHTML(getPostTitle(post))}</h3>
+  <div class="post-info">
 
-      <p>${escapeHTML(categoryLabels[getPostCategory(post)])}</p>
+    <h3>${escapeHTML(getPostTitle(post))}</h3>
 
-      <div class="post-stats">
-        <span class="interaction-label">Interactions</span>
+    <p>${escapeHTML(categoryLabels[getPostCategory(post)])}</p>
 
-        <strong id="interactions-${escapeHTML(post.id)}">
-          0
-        </strong>
+    <div class="post-stats">
+      <span class="interaction-label">Interactions</span>
 
-        <div
-          class="engagement-badge"
-          id="badge-${escapeHTML(post.id)}">
-          Needs more interactions
-        </div>
+      <strong id="interactions-${escapeHTML(post.id)}">0</strong>
+
+      <div
+        class="engagement-badge"
+        id="badge-${escapeHTML(post.id)}">
+        Needs more interactions
       </div>
-
     </div>
-  `;
 
+  </div>
+`;
+  
   const thumbnail = card.querySelector(".post-thumbnail");
-  const image = thumbnail.querySelector("img");
+const image = thumbnail.querySelector("img");
+const fallback = thumbnail.querySelector(
+  ".post-thumbnail-fallback"
+);
 
-if (image) {
+if (post.image) {
   image.addEventListener("error", () => {
     image.remove();
     fallback.style.display = "flex";
   }, { once: true });
-
-  if (!post.image) {
-    image.hidden = true;
-
-    loadPostThumbnail(post, image, fallback).then(() => {
-      if (image.src && image.isConnected) {
-        image.hidden = false;
-      }
-    });
-  }
 } else {
-  fallback.style.display = "flex";
+  loadPostThumbnail(post, image, fallback);
 }
 
   card.addEventListener("click", () => {
