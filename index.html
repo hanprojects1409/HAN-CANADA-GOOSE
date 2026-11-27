@@ -185,15 +185,44 @@ SELECT A POST TO SUPPORT
 ✕
 </button>
 
-<p class="modal-subtitle" id="modal-platform">
-CAMPAIGN POST
-</p>
+<div class="modal-layout">
 
-<h2 id="modal-title">
-Post Title
-</h2>
+    <div class="modal-thumbnail">
 
-<div id="modal-description" class="modal-description"></div>
+        <img
+            id="modal-image"
+            src=""
+            alt="Selected post preview"
+            hidden
+        >
+
+        <div
+            id="modal-image-fallback"
+            class="post-thumbnail-fallback"
+        >
+            IMAGE UNAVAILABLE
+        </div>
+
+    </div>
+
+    <div class="modal-details">
+
+        <p class="modal-subtitle" id="modal-platform">
+            POST
+        </p>
+
+        <h2 id="modal-title">
+            Post Title
+        </h2>
+
+        <div
+            id="modal-description"
+            class="modal-description"
+        ></div>
+
+    </div>
+
+</div>
 
 
 
