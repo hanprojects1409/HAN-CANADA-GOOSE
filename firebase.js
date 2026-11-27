@@ -12,16 +12,15 @@ import {
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAa9NumsNv8tCPm50e2GmNIvL7g1T01Boo",
-  authDomain: "han-tracker.firebaseapp.com",
+  apiKey: "AIzaSyBaXbUrzQ0GtlewXELCL-46m2_4eDclIOY",
+  authDomain: "han-x-canada-goose.firebaseapp.com",
   databaseURL: "https://han-x-canada-goose-default-rtdb.firebaseio.com",
-  projectId: "han-tracker",
-  storageBucket: "han-tracker.firebasestorage.app",
-  messagingSenderId: "1056623787129",
-  appId: "1:1056623787129:web:68434d059b4be07e5468a8",
-  measurementId: "G-XYVJRDEMYK"
+  projectId: "han-x-canada-goose",
+  storageBucket: "han-x-canada-goose.firebasestorage.app",
+  messagingSenderId: "713933943638",
+  appId: "1:713933943638:web:7c4a8096b81d3a93519cf7",
+  measurementId: "G-J3GZN8S99H"
 };
-
 
 
 const app = initializeApp(firebaseConfig);
@@ -29,12 +28,10 @@ const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 
 
-
 export {
   ref,
   onValue
 };
-
 
 
 export async function recordPostInteraction(postId) {
@@ -51,7 +48,6 @@ export async function recordPostInteraction(postId) {
     interactionRef,
     currentValue => {
       const currentCount = Number(currentValue || 0);
-
       return currentCount + 1;
     }
   );
