@@ -487,9 +487,18 @@ openCommentBtn.addEventListener("click", () => {
 
 
 
-if (closeModal) {
-  closeModal.addEventListener("click", () => {
-    modal?.classList.remove("active");
+if (modal) {
+  modal.addEventListener("click", (event) => {
+    if (
+      event.target === closeModal ||
+      closeModal?.contains(event.target)
+    ) {
+      modal.classList.remove("active");
+    }
+
+    if (event.target === modal) {
+      modal.classList.remove("active");
+    }
   });
 }
 
