@@ -57,9 +57,47 @@ const fixedHashtags = [
 let currentPost = null;
 
 const globalStats = {};
-
 const completedThisSession = new Set();
 
+
+/* ERROR MESSAGE */
+
+const interactionMessage = document.createElement("div");
+
+interactionMessage.id = "interaction-message";
+
+interactionMessage.style.display = "none";
+interactionMessage.style.marginTop = "12px";
+interactionMessage.style.padding = "12px";
+interactionMessage.style.border = "1px solid #555";
+interactionMessage.style.borderRadius = "6px";
+interactionMessage.style.fontSize = "13px";
+interactionMessage.style.lineHeight = "1.5";
+interactionMessage.style.overflowWrap = "anywhere";
+
+if (markCompletedBtn) {
+  markCompletedBtn.insertAdjacentElement(
+    "afterend",
+    interactionMessage
+  );
+}
+
+
+function showInteractionMessage(message, isError = false) {
+  interactionMessage.style.display = "block";
+  interactionMessage.style.color = isError ? "#ff7777" : "#ffffff";
+  interactionMessage.style.borderColor = isError ? "#b50b00" : "#555";
+  interactionMessage.textContent = message;
+}
+
+
+function hideInteractionMessage() {
+  interactionMessage.style.display = "none";
+  interactionMessage.textContent = "";
+}
+
+
+/* HELPERS */
 
 function escapeHTML(value) {
   return String(value ?? "").replace(
@@ -80,28 +118,20 @@ function getPostCategory(post) {
     post.category || post.platform || ""
   ).toLowerCase();
 
-  if (value.includes("naver")) {
-    return "naver";
-  }
+  if (value.includes("naver")) return "naver";
 
   if (
     value.includes("instagram") ||
     value === "ig"
-  ) {
-    return "instagram";
-  }
+  ) return "instagram";
 
   if (
     value.includes("twitter") ||
     value.includes("x.com") ||
     value === "x"
-  ) {
-    return "twitter";
-  }
+  ) return "twitter";
 
-  if (value.includes("tiktok")) {
-    return "tiktok";
-  }
+  if (value.includes("tiktok")) return "tiktok";
 
   return "han";
 }
@@ -130,6 +160,47 @@ function openExternalLink(url) {
     "_blank",
     "noopener,noreferrer"
   );
+}
+
+
+/* HASHTAGS */
+
+if (hashtagsContainer) {
+  hashtagsContainer.innerHTML = fixedHashtags
+    .map(tag => `<span>${tag}</span>`)
+    .join("");
+}
+
+
+if (copyHashtagsBtn) {
+  copyHashtagsBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(
+        fixedHashtags.join(" ")
+      );
+
+      copyHashtagsBtn.textContent = "Hashtags copied";
+
+      setTimeout(() => {
+        copyHashtagsBtn.textContent = "Copy hashtags";
+      }, 1500);
+
+    } catch (error) {
+      console.error("Error copying hashtags:", error);
+    }
+  });
+}
+
+
+/* IMAGE PREVIEWS */
+
+let previewQueue = Promise.resolve();
+
+
+function queuePreview(task) {
+  const request = previewQueue.then(task);
+  previewQueue = request.catch(() => {});
+  return request;
 }
 
 
@@ -190,43 +261,6 @@ function updateModalImage(post) {
 }
 
 
-if (hashtagsContainer) {
-  hashtagsContainer.innerHTML = fixedHashtags
-    .map(tag => `<span>${tag}</span>`)
-    .join("");
-}
-
-
-if (copyHashtagsBtn) {
-  copyHashtagsBtn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(
-        fixedHashtags.join(" ")
-      );
-
-      copyHashtagsBtn.textContent = "Hashtags copied";
-
-      setTimeout(() => {
-        copyHashtagsBtn.textContent = "Copy hashtags";
-      }, 1500);
-
-    } catch (error) {
-      console.error("Error copying hashtags:", error);
-    }
-  });
-}
-
-
-let previewQueue = Promise.resolve();
-
-
-function queuePreview(task) {
-  const request = previewQueue.then(task);
-  previewQueue = request.catch(() => {});
-  return request;
-}
-
-
 async function loadPostThumbnail(post, image, fallback) {
   const link = getPostLink(post);
 
@@ -267,6 +301,8 @@ async function loadPostThumbnail(post, image, fallback) {
   }
 }
 
+
+/* POST CARDS */
 
 function createPostCard(post) {
   const card = document.createElement("article");
@@ -338,15 +374,13 @@ function createPostCard(post) {
 }
 
 
-if (
-  Array.isArray(window.posts) &&
-  container
-) {
+if (Array.isArray(window.posts) && container) {
   container.innerHTML = "";
-
   window.posts.forEach(createPostCard);
 }
 
+
+/* CATEGORY TABS */
 
 document.querySelectorAll(".tab-btn").forEach(button => {
   button.addEventListener("click", () => {
@@ -366,9 +400,29 @@ document.querySelectorAll(".tab-btn").forEach(button => {
 });
 
 
+/* COMMENT GENERATOR BUTTON */
+
+const openCommentBtn = document.createElement("button");
+
+openCommentBtn.type = "button";
+openCommentBtn.id = "open-comment-generator-btn";
+openCommentBtn.textContent = "OPEN COMMENT GENERATOR";
+
+if (modalDescription) {
+  modalDescription.after(openCommentBtn);
+}
+
+openCommentBtn.addEventListener("click", () => {
+  commentModal?.classList.add("active");
+});
+
+
+/* OPEN POST MODAL */
+
 function openModal(post) {
   currentPost = post;
 
+  hideInteractionMessage();
   updateModalImage(post);
 
   const category = getPostCategory(post);
@@ -384,17 +438,14 @@ function openModal(post) {
   }
 
   if (modalDescription) {
-    modalDescription.textContent =
-      getPostDescription(post);
+    modalDescription.textContent = getPostDescription(post);
   }
 
   if (postInstructions) {
     postInstructions.hidden = isNaver;
   }
 
-  if (openCommentBtn) {
-    openCommentBtn.hidden = isNaver;
-  }
+  openCommentBtn.hidden = isNaver;
 
   if (openPostBtn) {
     openPostBtn.textContent = isNaver
@@ -426,6 +477,8 @@ function openModal(post) {
 }
 
 
+/* RECORD INTERACTION */
+
 if (markCompletedBtn) {
   markCompletedBtn.addEventListener("click", async () => {
     if (!currentPost) return;
@@ -439,8 +492,14 @@ if (markCompletedBtn) {
     markCompletedBtn.disabled = true;
     markCompletedBtn.textContent = "Recording...";
 
+    hideInteractionMessage();
+
+    showInteractionMessage(
+      `Sending interaction for ${postId}...`
+    );
+
     try {
-      await recordPostInteraction(postId);
+      const savedCount = await recordPostInteraction(postId);
 
       completedThisSession.add(postId);
 
@@ -449,37 +508,33 @@ if (markCompletedBtn) {
           ? "Article completed"
           : "Interaction recorded";
 
-    } catch (error) {
-      console.error(
-        "Error recording interaction:",
-        error
+      showInteractionMessage(
+        `SUCCESS: Firebase saved ${savedCount} interaction(s) for ${postId}.`
       );
+
+    } catch (error) {
+      console.error("Error recording interaction:", error);
 
       markCompletedBtn.disabled = false;
       markCompletedBtn.textContent = "Try again";
+
+      const errorCode = error?.code || "No error code";
+      const errorMessage = error?.message || String(error);
+
+      showInteractionMessage(
+        `FIREBASE ERROR\nCode: ${errorCode}\nMessage: ${errorMessage}`,
+        true
+      );
     }
   });
 }
 
 
-const openCommentBtn = document.createElement("button");
-
-openCommentBtn.type = "button";
-openCommentBtn.id = "open-comment-generator-btn";
-openCommentBtn.textContent = "OPEN COMMENT GENERATOR";
-
-if (modalDescription) {
-  modalDescription.after(openCommentBtn);
-}
-
-openCommentBtn.addEventListener("click", () => {
-  commentModal?.classList.add("active");
-});
-
-
 /* MAIN MODAL CLOSING */
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", event => {
+  if (!(event.target instanceof Element)) return;
+
   const clickedCloseButton = event.target.closest("#close-modal");
 
   if (clickedCloseButton) {
@@ -504,11 +559,11 @@ if (closeCommentModal) {
 }
 
 
+/* PICK COMMENT */
+
 if (pickCommentBtn) {
   pickCommentBtn.addEventListener("click", () => {
-    if (!languageSelect || !generatedComment) {
-      return;
-    }
+    if (!languageSelect || !generatedComment) return;
 
     const language = languageSelect.value;
     const comments = window.comments?.[language];
@@ -523,11 +578,12 @@ if (pickCommentBtn) {
       Math.random() * comments.length
     );
 
-    generatedComment.textContent =
-      comments[randomIndex];
+    generatedComment.textContent = comments[randomIndex];
   });
 }
 
+
+/* COPY COMMENT */
 
 if (copyCommentBtn) {
   copyCommentBtn.addEventListener("click", async () => {
@@ -558,6 +614,8 @@ if (copyCommentBtn) {
   });
 }
 
+
+/* REALTIME POST COUNTERS */
 
 function watchPostStats(post) {
   const postRef = ref(
@@ -610,6 +668,8 @@ function watchPostStats(post) {
   );
 }
 
+
+/* OVERVIEW COUNTERS */
 
 function updateOverview() {
   const posts = Array.isArray(window.posts)
