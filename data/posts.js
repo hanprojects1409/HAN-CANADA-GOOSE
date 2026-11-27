@@ -7,7 +7,7 @@ window.posts = [
     title: "Canada Goose x Dazed Korea",
     platform: "han",
     link: "https://www.instagram.com/share/BCRiqZwPzh",
-  },
+  }, 
   {
     id: "han_002",
     title: "Canada Goose x Dazed Korea",
