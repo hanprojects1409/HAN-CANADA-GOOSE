@@ -12,8 +12,7 @@ const modalTitle = document.getElementById("modal-title");
 const modalPlatform = document.getElementById("modal-platform");
 const modalDescription = document.getElementById("modal-description");
 const modalImage = document.getElementById("modal-image");
-const modalImageFallback = document.getElementById(
-  "modal-image-fallback");
+const modalImageFallback = document.getElementById("modal-image-fallback");
 const openPostBtn = document.getElementById("open-post-btn");
 const closeModal = document.getElementById("close-modal");
 
@@ -31,9 +30,7 @@ const hashtagsContainer = document.getElementById("hashtags");
 
 const container = document.getElementById("posts-container");
 const markCompletedBtn = document.getElementById("mark-completed-btn");
-const postInstructions = document.getElementById(
-  "post-instructions"
-);
+const postInstructions = document.getElementById("post-instructions");
 
 
 const categories = [
@@ -61,8 +58,6 @@ let currentPost = null;
 
 const globalStats = {};
 
-// Prevent accidental repeated clicks during this page session.
-// No user identity or personal interaction history is stored.
 const completedThisSession = new Set();
 
 
@@ -78,6 +73,7 @@ function escapeHTML(value) {
     })[character]
   );
 }
+
 
 function getPostCategory(post) {
   const value = String(
@@ -110,17 +106,21 @@ function getPostCategory(post) {
   return "han";
 }
 
+
 function getPostTitle(post) {
   return post.title || post.id;
 }
+
 
 function getPostDescription(post) {
   return post.description || post.caption || "";
 }
 
+
 function getPostLink(post) {
   return post.link || post.url || "";
 }
+
 
 function openExternalLink(url) {
   if (!url) return;
@@ -132,8 +132,8 @@ function openExternalLink(url) {
   );
 }
 
-function updateModalImage(post) {
 
+function updateModalImage(post) {
   if (!modalImage || !modalImageFallback) return;
 
   modalImage.hidden = true;
@@ -161,7 +161,6 @@ function updateModalImage(post) {
   if (!link) return;
 
   queuePreview(async () => {
-
     const response = await fetch(
       `/preview?url=${encodeURIComponent(link)}`
     );
@@ -171,9 +170,7 @@ function updateModalImage(post) {
     }
 
     return await response.json();
-
   }).then(data => {
-
     if (currentPost !== post) return;
 
     if (!data.image) {
@@ -183,16 +180,13 @@ function updateModalImage(post) {
     modalImage.src = data.image.replace(/&amp;/g, "&");
 
   }).catch(error => {
-
     if (currentPost !== post) return;
 
     console.error("Modal thumbnail error:", error);
 
     modalImage.hidden = true;
     modalImageFallback.style.display = "flex";
-
   });
-
 }
 
 
@@ -201,6 +195,7 @@ if (hashtagsContainer) {
     .map(tag => `<span>${tag}</span>`)
     .join("");
 }
+
 
 if (copyHashtagsBtn) {
   copyHashtagsBtn.addEventListener("click", async () => {
@@ -222,8 +217,8 @@ if (copyHashtagsBtn) {
 }
 
 
-
 let previewQueue = Promise.resolve();
+
 
 function queuePreview(task) {
   const request = previewQueue.then(task);
@@ -272,6 +267,7 @@ async function loadPostThumbnail(post, image, fallback) {
   }
 }
 
+
 function createPostCard(post) {
   const card = document.createElement("article");
 
@@ -279,57 +275,58 @@ function createPostCard(post) {
   card.dataset.category = getPostCategory(post);
   card.dataset.postId = post.id;
 
-card.innerHTML = `
-  <div class="post-thumbnail">
+  card.innerHTML = `
+    <div class="post-thumbnail">
 
-    <img
-      src="${post.image ? escapeHTML(post.image) : ""}"
-      alt="${escapeHTML(getPostTitle(post))}"
-      loading="lazy"
-      ${post.image ? "" : "hidden"}
-    >
+      <img
+        src="${post.image ? escapeHTML(post.image) : ""}"
+        alt="${escapeHTML(getPostTitle(post))}"
+        loading="lazy"
+        ${post.image ? "" : "hidden"}
+      >
 
-    <div class="post-thumbnail-fallback">
-      IMAGE UNAVAILABLE
-    </div>
-
-  </div>
-
-  <div class="post-info">
-
-    <h3>${escapeHTML(getPostTitle(post))}</h3>
-
-    <p>${escapeHTML(categoryLabels[getPostCategory(post)])}</p>
-
-    <div class="post-stats">
-      <span class="interaction-label">Interactions</span>
-
-      <strong id="interactions-${escapeHTML(post.id)}">0</strong>
-
-      <div
-        class="engagement-badge"
-        id="badge-${escapeHTML(post.id)}">
-        Needs more interactions
+      <div class="post-thumbnail-fallback">
+        IMAGE UNAVAILABLE
       </div>
+
     </div>
 
-  </div>
-`;
-  
-  const thumbnail = card.querySelector(".post-thumbnail");
-const image = thumbnail.querySelector("img");
-const fallback = thumbnail.querySelector(
-  ".post-thumbnail-fallback"
-);
+    <div class="post-info">
 
-if (post.image) {
-  image.addEventListener("error", () => {
-    image.remove();
-    fallback.style.display = "flex";
-  }, { once: true });
-} else {
-  loadPostThumbnail(post, image, fallback);
-}
+      <h3>${escapeHTML(getPostTitle(post))}</h3>
+
+      <p>${escapeHTML(categoryLabels[getPostCategory(post)])}</p>
+
+      <div class="post-stats">
+        <span class="interaction-label">Interactions</span>
+
+        <strong id="interactions-${escapeHTML(post.id)}">0</strong>
+
+        <div
+          class="engagement-badge"
+          id="badge-${escapeHTML(post.id)}">
+          Needs more interactions
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  const thumbnail = card.querySelector(".post-thumbnail");
+  const image = thumbnail.querySelector("img");
+  const fallback = thumbnail.querySelector(
+    ".post-thumbnail-fallback"
+  );
+
+  if (post.image) {
+    image.addEventListener("error", () => {
+      image.remove();
+      fallback.style.display = "flex";
+    }, { once: true });
+
+  } else {
+    loadPostThumbnail(post, image, fallback);
+  }
 
   card.addEventListener("click", () => {
     openModal(post);
@@ -341,7 +338,6 @@ if (post.image) {
 }
 
 
-
 if (
   Array.isArray(window.posts) &&
   container
@@ -350,7 +346,6 @@ if (
 
   window.posts.forEach(createPostCard);
 }
-
 
 
 document.querySelectorAll(".tab-btn").forEach(button => {
@@ -371,10 +366,10 @@ document.querySelectorAll(".tab-btn").forEach(button => {
 });
 
 
-
 function openModal(post) {
   currentPost = post;
-    updateModalImage(post);
+
+  updateModalImage(post);
 
   const category = getPostCategory(post);
   const isNaver = category === "naver";
@@ -392,8 +387,6 @@ function openModal(post) {
     modalDescription.textContent =
       getPostDescription(post);
   }
-
-  // Adapt modal according to post type
 
   if (postInstructions) {
     postInstructions.hidden = isNaver;
@@ -452,9 +445,9 @@ if (markCompletedBtn) {
       completedThisSession.add(postId);
 
       markCompletedBtn.textContent =
-  getPostCategory(currentPost) === "naver"
-    ? "Article completed"
-    : "Interaction recorded";
+        getPostCategory(currentPost) === "naver"
+          ? "Article completed"
+          : "Interaction recorded";
 
     } catch (error) {
       console.error(
@@ -463,9 +456,7 @@ if (markCompletedBtn) {
       );
 
       markCompletedBtn.disabled = false;
-      markCompletedBtn.textContent =
-        "Try again";
-
+      markCompletedBtn.textContent = "Try again";
     }
   });
 }
@@ -478,16 +469,33 @@ openCommentBtn.id = "open-comment-generator-btn";
 openCommentBtn.textContent = "OPEN COMMENT GENERATOR";
 
 if (modalDescription) {
-    modalDescription.after(openCommentBtn);
+  modalDescription.after(openCommentBtn);
 }
 
 openCommentBtn.addEventListener("click", () => {
-    commentModal?.classList.add("active");
+  commentModal?.classList.add("active");
 });
 
 
+/* MAIN MODAL CLOSING */
+
+document.addEventListener("click", (event) => {
+  const clickedCloseButton = event.target.closest("#close-modal");
+
+  if (clickedCloseButton) {
+    event.preventDefault();
+    event.stopPropagation();
+    modal?.classList.remove("active");
+    return;
+  }
+
+  if (event.target === modal) {
+    modal?.classList.remove("active");
+  }
+}, true);
 
 
+/* COMMENT MODAL CLOSING */
 
 if (closeCommentModal) {
   closeCommentModal.addEventListener("click", () => {
@@ -495,21 +503,6 @@ if (closeCommentModal) {
   });
 }
 
-if (closeModal) {
-  closeModal.onclick = function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    modal.classList.remove("active");
-  };
-}
-
-if (modal) {
-  modal.addEventListener("click", function(event) {
-    if (event.target === modal) {
-      modal.classList.remove("active");
-    }
-  });
-}
 
 if (pickCommentBtn) {
   pickCommentBtn.addEventListener("click", () => {
@@ -534,7 +527,6 @@ if (pickCommentBtn) {
       comments[randomIndex];
   });
 }
-
 
 
 if (copyCommentBtn) {
@@ -565,7 +557,6 @@ if (copyCommentBtn) {
     }
   });
 }
-
 
 
 function watchPostStats(post) {
@@ -620,7 +611,6 @@ function watchPostStats(post) {
 }
 
 
-
 function updateOverview() {
   const posts = Array.isArray(window.posts)
     ? window.posts
@@ -636,7 +626,7 @@ function updateOverview() {
     twitter: { posts: 0, activePosts: 0, interactions: 0 },
     tiktok: { posts: 0, activePosts: 0, interactions: 0 },
     naver: { posts: 0, activePosts: 0, interactions: 0 }
-};
+  };
 
   posts.forEach(post => {
     const category = getPostCategory(post);
@@ -698,5 +688,6 @@ function updateOverview() {
     }
   });
 }
+
 
 updateOverview();
